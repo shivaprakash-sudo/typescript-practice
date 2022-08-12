@@ -1,17 +1,14 @@
 "use strict";
-// implicit declaration of type
-let add = (a, b) => {
-    return a + b;
+const doMagic = (uid, item) => {
+    console.log(`${item} has a uid of ${uid}`);
 };
-console.log(add(2, 2));
-// explicit declaration of type
-let func;
-func = () => {
-    console.log("this is a function");
+const doSomeMagic = (user) => {
+    console.log(`${user.name} wants to play some games`);
 };
-// function with an option value
-let doMagic = (a, b, c) => {
-    console.log(`${a} ${c} ${b}`);
+const doSomeMoreMagic = (user) => {
+    console.log(`${user.name} has an uid of ${user.uid}`);
 };
-doMagic(1, 4);
-doMagic(1, 4, 3);
+doMagic(1234, "Banana");
+const userObj = { name: "Shiva", uid: "sdgnklsd" };
+doSomeMagic(userObj);
+doSomeMoreMagic(userObj);
