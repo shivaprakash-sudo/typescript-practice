@@ -31,13 +31,21 @@ const addUID = (obj) => {
 let docOne = addUID(person);
 // let docTwo = addUID("hello");	// shows error, because we're only allowing objects
 console.log(docOne.name);
+// with interfaces
+// ENUMS
+var Gender;
+(function (Gender) {
+    Gender[Gender["male"] = 0] = "male";
+    Gender[Gender["female"] = 1] = "female";
+    Gender[Gender["other"] = 2] = "other";
+})(Gender || (Gender = {}));
 const resourceOne = {
     uid: 1,
-    resourceName: "person",
+    gender: Gender.male,
     data: "Shiva"
 };
 const resourceTwo = {
     uid: 2,
-    resourceName: "groceries",
+    gender: Gender.other,
     data: { name: "bananas" }
 };

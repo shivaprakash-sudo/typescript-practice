@@ -41,21 +41,24 @@ let docOne = addUID(person);
 console.log(docOne.name);
 
 // with interfaces
+// ENUMS
+
+enum Gender {male, female, other}
 
 interface Resource<T> {
 	uid: number,
-	resourceName: string,
+	gender: Gender,		// male, female and other
 	data: T
 }
 
 const resourceOne: Resource<string> = {
 	uid: 1,
-	resourceName: "person",
+	gender: Gender.male,
 	data: "Shiva"
 }
 
 const resourceTwo: Resource<object> = {
 	uid: 2,
-	resourceName: "groceries",
+	gender: Gender.other,
 	data: { name: "bananas" }
 }
