@@ -11,41 +11,17 @@ const li = new ListTemplate(ul);
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     let newDoc;
+    let values;
+    values = [tofrom.value, details.value, amount.valueAsNumber];
     if (type.value === "invoice") {
-        newDoc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+        newDoc = new Invoice(...values);
     }
     else if (type.value === "payment") {
-        newDoc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+        newDoc = new Payment(...values);
     }
     li.render(newDoc, type.value, "start");
 });
-// GENERICS
-let person = {
-    name: "Shiva",
-    age: 20
-};
-const addUID = (obj) => {
-    const randomNum = Math.floor(Math.random() * 100);
-    return Object.assign(Object.assign({}, obj), { uID: randomNum });
-};
-let docOne = addUID(person);
-// let docTwo = addUID("hello");	// shows error, because we're only allowing objects
-console.log(docOne.name);
-// with interfaces
-// ENUMS
-var Gender;
-(function (Gender) {
-    Gender[Gender["male"] = 0] = "male";
-    Gender[Gender["female"] = 1] = "female";
-    Gender[Gender["other"] = 2] = "other";
-})(Gender || (Gender = {}));
-const resourceOne = {
-    uid: 1,
-    gender: Gender.male,
-    data: "Shiva"
-};
-const resourceTwo = {
-    uid: 2,
-    gender: Gender.other,
-    data: { name: "bananas" }
-};
+// Tuples		// can't change type positions in an array once defined
+let tup = ["Shiva", 30];
+// tup[0] = 35		// throws error because we're trying to reassing a string type
+tup[0] = "Jay"; // no error, because we're not changing the type

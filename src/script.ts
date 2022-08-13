@@ -14,51 +14,21 @@ const li = new ListTemplate(ul);
 
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
+  
   let newDoc!: HasFormatter;
+  let values: [string, string, number];
+  values = [tofrom.value, details.value, amount.valueAsNumber];
+
   if (type.value === "invoice") {
-	newDoc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+	newDoc = new Invoice(...values);
   } else if (type.value === "payment") {
-	newDoc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+	newDoc = new Payment(...values);
   }
   li.render(newDoc, type.value, "start");
 }) 
 
-// GENERICS
+// Tuples		// can't change type positions in an array once defined
 
-let person = {
-	name: "Shiva",
-	age: 20
-}
-
-const addUID = <T extends object>(obj: T) => {
-	const randomNum = Math.floor(Math.random()*100);
-	return {...obj, uID: randomNum}
-}
-
-let docOne = addUID(person);
-// let docTwo = addUID("hello");	// shows error, because we're only allowing objects
-
-console.log(docOne.name);
-
-// with interfaces
-// ENUMS
-
-enum Gender {male, female, other}
-
-interface Resource<T> {
-	uid: number,
-	gender: Gender,		// male, female and other
-	data: T
-}
-
-const resourceOne: Resource<string> = {
-	uid: 1,
-	gender: Gender.male,
-	data: "Shiva"
-}
-
-const resourceTwo: Resource<object> = {
-	uid: 2,
-	gender: Gender.other,
-	data: { name: "bananas" }
-}
+let tup: [string, number] = ["Shiva", 30];
+// tup[0] = 35		// throws error because we're trying to reassing a string type
+tup[0] = "Jay";		// no error, because we're not changing the type
