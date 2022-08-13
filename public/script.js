@@ -19,3 +19,25 @@ form.addEventListener("submit", (e) => {
     }
     li.render(newDoc, type.value, "start");
 });
+// GENERICS
+let person = {
+    name: "Shiva",
+    age: 20
+};
+const addUID = (obj) => {
+    const randomNum = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uID: randomNum });
+};
+let docOne = addUID(person);
+// let docTwo = addUID("hello");	// shows error, because we're only allowing objects
+console.log(docOne.name);
+const resourceOne = {
+    uid: 1,
+    resourceName: "person",
+    data: "Shiva"
+};
+const resourceTwo = {
+    uid: 2,
+    resourceName: "groceries",
+    data: { name: "bananas" }
+};

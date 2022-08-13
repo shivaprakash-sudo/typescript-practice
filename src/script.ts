@@ -22,3 +22,40 @@ form.addEventListener("submit", (e: Event) => {
   }
   li.render(newDoc, type.value, "start");
 }) 
+
+// GENERICS
+
+let person = {
+	name: "Shiva",
+	age: 20
+}
+
+const addUID = <T extends object>(obj: T) => {
+	const randomNum = Math.floor(Math.random()*100);
+	return {...obj, uID: randomNum}
+}
+
+let docOne = addUID(person);
+// let docTwo = addUID("hello");	// shows error, because we're only allowing objects
+
+console.log(docOne.name);
+
+// with interfaces
+
+interface Resource<T> {
+	uid: number,
+	resourceName: string,
+	data: T
+}
+
+const resourceOne: Resource<string> = {
+	uid: 1,
+	resourceName: "person",
+	data: "Shiva"
+}
+
+const resourceTwo: Resource<object> = {
+	uid: 2,
+	resourceName: "groceries",
+	data: { name: "bananas" }
+}
