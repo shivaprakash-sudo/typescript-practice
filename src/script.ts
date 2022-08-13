@@ -1,29 +1,38 @@
-// interfaces
+import Invoice from './modules/Invoice.js';
+import Payment from './modules/Payment.js';
+import HasFormatter from './interfaces/HasFormatter.js';
 
-interface IsPerson {
-	name: string,
-	age: number,
-	speak(a:string) : void,
-	walk(a:number) : number
-}
+// let docOne: HasFormatter;
+// let docTwo: HasFormatter;
 
-const person: IsPerson = {
-	name: "Shiva",
-	age: 20,
-	speak(text){
-		console.log(`${this.name} says ${text}`)
-	},
-	walk(distance){
-		console.log(`${this.name} walked ${distance}kms`);
-		return distance;
-	}
-};
+// docOne = new Invoice("Shiva", "webdesign work", 400);
+// docTwo = new Payment("Jay", "website development", 500);
 
-const greet = (person:IsPerson) => {
-	console.log(`Hello ${person.name}!`);
-}
+const docs: HasFormatter[] = [];
 
-greet(person);
+// docs.push(docOne);
+// docs.push(docTwo);
 
-person.speak("ooolaallaaa");
-person.walk(10);
+
+
+const form = document.querySelector(".new-item-form") as HTMLFormElement;
+const type = document.querySelector("#type") as HTMLSelectElement;
+const tofrom = document.querySelector("#tofrom") as HTMLInputElement;
+const details = document.querySelector("#details") as HTMLInputElement;
+const amount = document.querySelector("#amount") as HTMLInputElement;
+
+form.addEventListener("submit", (e: Event) => {
+  e.preventDefault();
+  let newDoc: HasFormatter;
+  if (type.value === "invoice") {
+	newDoc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+	// docs.push(newDoc);
+	console.log(newDoc);
+  } else if (type.value === "payment") {
+	newDoc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+	// docs.push(newDoc);
+	console.log(newDoc);
+  }
+}) 
+
+console.log(docs);
