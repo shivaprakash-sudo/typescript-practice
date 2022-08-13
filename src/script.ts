@@ -1,14 +1,16 @@
-// classes
+// classes with access modifiers
 class Invoice {
-  client:string;
-  details:string;
-  amount:number;
+  // readonly client:string;      // can't change value once assigned
+  // private details:string;     // can't access outside class
+  // public amount:number;       // default behavior
+  // two more modifiers:
+  // - protected (class and subclasses) and 
+  // - static (constant for the whole class, even for the new objects)
 
-  constructor(c:string, d:string, a:number){
-    this.client = c;
-    this.details = d;
-    this.amount = a;
-  }
+  constructor(
+    readonly client:string, 
+    private details:string, 
+    public amount:number){}
 
   format ():string {
     return `${this.client} owes ${this.amount} for ${this.details}`;
@@ -26,7 +28,13 @@ let invoices: Invoice[] = [];
 invoices.push(invoiceOne);
 invoices.push(invoiceTwo);
 
-console.log(invoices);
+invoices.forEach(invoice=>{
+  console.log(
+    invoice.client, 
+    // invoice.details,
+    invoice.amount,
+    invoice.format());
+});
 
 const form = document.querySelector(".new-item-form") as HTMLFormElement;
 
